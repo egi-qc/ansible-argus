@@ -1,0 +1,3 @@
+---
+- name: Install Argus package
+  package: name=argus-authz state=latest
