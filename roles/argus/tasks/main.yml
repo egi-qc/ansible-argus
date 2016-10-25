@@ -1,3 +1,23 @@
 ---
 - name: Install Argus package
   package: name=argus-authz state=latest
+
+- name: PAP configuration
+  template: src=pap_configuration.ini.j2 dest=/usr/share/argus/pap/conf/pap_configuration.ini owner=root group=root mode=0640
+  notify: restart pap
+
+- name: PAP authorization
+  template: src=pap_authorization.ini.j2 dest=/usr/share/argus/pap/conf/pap_authorization.ini owner=root group=root mode=0640
+  notify: restart pap
+
+- name: PAP admin
+  template: src=pap-admin.properties.j2 dest=/usr/share/argus/pap/conf/pap-admin.properties owner=root group=root mode=0644
+  notify: restart pap
+
+- name: PDP configuration
+  template: src=pdp.ini.j2 dest=/etc/argus/pdp/pdp.ini owner=root group=root mode=0640
+  notify: restart pdp
+
+- name: PEPD configuration
+  template: src=pepd.ini.j2 dest=/usr/share/argus/pepd/conf/pepd.ini owner=root group=root mode=0640
+  notify: restart pepd

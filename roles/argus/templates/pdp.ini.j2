@@ -1,0 +1,23 @@
+#
+# Argus PDP configuration
+# 
+# Documentation: https://twiki.cern.ch/twiki/bin/view/EGEE/AuthZPDPConfig
+#
+# -- Configuration file created by Ansible --
+#
+[SERVICE]
+entityId = http://{{ pdp_host }}/pdp
+hostname = {{ pdp_host }}
+port     = {{ pdp_port }}
+adminPort = {{ pdp_port_admin }}
+adminPassword = {{ pdp_pass_admin }}
+
+[POLICY]
+paps = https://{{ pap_host }}:{{ pap_port }}/pap/services/ProvisioningService
+retentionInterval = 240
+
+[SECURITY]
+servicePrivateKey = {{ pdp_host_key }} 
+serviceCertificate = {{ pdp_host_cert }}
+trustInfoDir = /etc/grid-security/certificates/
+enableSSL = true

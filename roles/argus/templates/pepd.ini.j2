@@ -1,0 +1,63 @@
+#
+# Argus PEP Server configuration
+#
+# Documentation: https://twiki.cern.ch/twiki/bin/view/EGEE/AuthZPEPDConfig
+# 
+# -- Configuration file created by Ansible --
+#
+[SERVICE]
+entityId  = http://{{ pepd_host }}/pepd
+hostname  = {{ pepd_host }}
+port      = {{ pepd_port }}
+adminPort = {{ pepd_port_admin }}
+adminPassword = {{ pepd_pass_admin }}
+
+pips = REQVALIDATOR_PIP OPENSSLSUBJECT_PIP GLITEXACMLPROFILE_PIP COMMONXACMLPROFILE_PIP
+obligationHandlers = ACCOUNTMAPPER_OH
+
+[PDP]
+pdps = https://{{ pdp_host }}:{{ pdp_port }}/authz
+maximumCachedResponses = 0 
+
+[SECURITY]
+servicePrivateKey = {{ pepd_host_cert }}
+serviceCertificate = {{ pepd_host_key }}
+trustInfoDir = /etc/grid-security/certificates/
+enableSSL = true
+requireClientCertAuthentication = true
+
+#
+# Policy Information Points (PIP) configuration
+#
+[REQVALIDATOR_PIP]
+parserClass = org.glite.authz.pep.pip.provider.RequestValidatorPIPIniConfigurationParser
+validateRequestSubjects = true
+validateRequestResources = true
+validateRequestAction = true
+validateRequestEnvironment = false
+
+[OPENSSLSUBJECT_PIP]
+parserClass = org.glite.authz.pep.pip.provider.OpenSSLSubjectPIPIniConfigurationParser
+opensslSubjectAttributeIDs = http://glite.org/xacml/attribute/subject-issuer urn:oasis:names:tc:xacml:1.0:subject:subject-id
+opensslSubjectAttributeDatatypes = http://www.w3.org/2001/XMLSchema#string
+
+[GLITEXACMLPROFILE_PIP]
+parserClass = org.glite.authz.pep.pip.provider.GLiteAuthorizationProfilePIPIniConfigurationParser
+vomsInfoDir = /etc/grid-security/vomsdir/
+acceptedProfileIDs = http://glite.org/xacml/profile/grid-ce/1.0 http://glite.org/xacml/profile/grid-wn/1.0
+
+[COMMONXACMLPROFILE_PIP]
+parserClass = org.glite.authz.pep.pip.provider.CommonXACMLAuthorizationProfilePIPIniConfigurationParser
+vomsInfoDir = /etc/grid-security/vomsdir/
+acceptedProfileIDs = http://dci-sec.org/xacml/profile/common-authz/1.1 
+
+#
+# Obligation Handlers (OH) configuration
+#
+[ACCOUNTMAPPER_OH]
+parserClass = org.glite.authz.pep.obligation.dfpmap.DFPMObligationHandlerConfigurationParser
+handledObligationId = http://glite.org/xacml/obligation/local-environment-map
+accountMapFile = /etc/grid-security/grid-mapfile 
+groupMapFile = /etc/grid-security/groupmapfile
+gridMapDir = /etc/grid-security/gridmapdir
+useSecondaryGroupNamesForMapping = true

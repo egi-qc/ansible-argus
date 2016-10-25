@@ -1,0 +1,13 @@
+#
+# PAP service access control
+# 
+# Documentation: https://twiki.cern.ch/twiki/bin/view/EGEE/AuthZPAPConfig
+#
+# -- Configuration file created by Ansible --
+[dn]
+"{{ pap_host_dn }}" : ALL
+{% for dn in pap_admin_dn %}
+"{{ dn }}" : ALL
+{% endfor %}
+
+[fqan]

@@ -1,0 +1,9 @@
+---
+- name: restart pap
+  service: name=argus-pap state=restarted
+
+- name: restart pdp
+  service: name=argus-pdp state=restarted
+
+- name: restart pepd
+  service: name=argus-pepd state=restarted

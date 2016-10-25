@@ -1,0 +1,34 @@
+#
+# PAP configuration
+# 
+# Documentation: https://twiki.cern.ch/twiki/bin/view/EGEE/AuthZPAPConfig
+# 
+# -- Configuration file created by Ansible --
+#
+[paps]
+## Trusted PAPs will be listed here
+
+[paps:properties]
+
+poll_interval = 14400
+ordering = default
+
+[repository]
+
+location = /usr/share/argus/pap/repository
+consistency_check = false
+consistency_check.repair = false
+
+[standalone-service]
+
+entity_id = http://{{ pap_host }}/pap
+hostname = {{ pap_host }}
+port = {{ pap_port }}
+shutdown_port = {{ pap_port_shutdown }}
+shutdown_command = papshutdown_20160613114222
+
+[security]
+
+certificate = {{ pap_host_cert }}
+private_key = {{ pap_host_key }}
+
