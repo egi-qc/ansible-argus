@@ -19,7 +19,7 @@ pdp_host_key: /etc/grid-security/hostkey.pem
 pepd_host: example.org
 pepd_port: 8154
 pepd_port_admin: 8155
-pepd_pass_admin: 8155
+pepd_pass_admin: pepdadmin_pass
 pepd_host_cert: /etc/grid-security/hostcert.pem
 pepd_host_key: /etc/grid-security/hostkey.pem
 # grid-security

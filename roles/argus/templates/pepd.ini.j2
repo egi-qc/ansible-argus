@@ -20,8 +20,8 @@ pdps = https://{{ pdp_host }}:{{ pdp_port }}/authz
 maximumCachedResponses = 0 
 
 [SECURITY]
-servicePrivateKey = {{ pepd_host_cert }}
-serviceCertificate = {{ pepd_host_key }}
+servicePrivateKey = {{ pepd_host_key }}
+serviceCertificate = {{ pepd_host_cert }}
 trustInfoDir = /etc/grid-security/certificates/
 enableSSL = true
 requireClientCertAuthentication = true
