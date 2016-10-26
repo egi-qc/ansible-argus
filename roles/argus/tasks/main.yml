@@ -14,10 +14,22 @@
   template: src=pap-admin.properties.j2 dest=/usr/share/argus/pap/conf/pap-admin.properties owner=root group=root mode=0644
   notify: restart pap
 
+- name: Start the pap service
+  service: name=argus-pap state=started enabled=yes
+  tags: pap
+
 - name: PDP configuration
   template: src=pdp.ini.j2 dest=/etc/argus/pdp/pdp.ini owner=root group=root mode=0640
   notify: restart pdp
 
+- name: Start the pdp service
+  service: name=argus-pdp state=started enabled=yes
+  tags: pdp
+
 - name: PEPD configuration
   template: src=pepd.ini.j2 dest=/usr/share/argus/pepd/conf/pepd.ini owner=root group=root mode=0640
   notify: restart pepd
+
+- name: Start the pepd service
+  service: name=argus-pepd state=started enabled=yes
+  tags: pepd
