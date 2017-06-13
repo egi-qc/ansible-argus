@@ -1,4 +1,5 @@
 ---
 dependencies:
-  - { role: 'umd_role' }
+  - { role: 'umd' }
+  - { role: 'grid-security' }
   - { role: 'bdii' }

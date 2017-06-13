@@ -1,6 +1,10 @@
 - src: https://github.com/egi-qc/ansible-umd
   version: master
-  name: umd_role
+  name: umd
+
+- src: https://github.com/egi-qc/ansible-grid-security
+  version: master
+  name: grid-security
 
 - src: https://github.com/egi-qc/ansible-bdii
   version: master
